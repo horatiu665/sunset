@@ -214,3 +214,18 @@ setInterval(() => {
 
     }
 }, dt);
+
+
+
+// do-sunset button
+var doSunsetButton = document.getElementById("do-sunset");
+doSunsetButton.addEventListener("click", function () {
+    follow = false;
+    time = 0;
+});
+
+// do-mouse-control button
+var doMouseControlButton = document.getElementById("do-mouse-control");
+doMouseControlButton.addEventListener("click", function () {
+    follow = true;
+});

@@ -54,7 +54,10 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
         </div>
     </div>
 
-    <div id="debug" class="fixed">
+    <div id="debug" class="fixed above">
+        <button id="do-sunset">Restart Sunset</button>
+        <button id="do-mouse-control">Mouse Controls</button>
+
         <!-- <div id="sunset-slider">
             <input type="range" min="0" max="1000" value="0" class="slider" id="sunset-slider-input">
             <label for="sunset-slider-input">Sunset</label>

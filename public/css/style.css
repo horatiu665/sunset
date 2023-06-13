@@ -39,6 +39,10 @@ body {
     /* filter: brightness(var(--sunset01)) */
 }
 
+.above {
+    z-index: 1000;
+}
+
 #bg-sky {
     position: absolute;
     /* width: 100%;
