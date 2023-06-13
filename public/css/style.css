@@ -1,0 +1,116 @@
+:root {
+    /* colors */
+
+    /* vars */
+    --s-hue: 0deg;
+    --s-saturate: 100%;
+    --s-brightness: 100%;
+    --s-blur: 0px;
+    --s-invert: 0%;
+    --s-sepia: 0%;
+    --s-grayscale: 0%;
+    --s-contrast: 100%;
+    
+    --d-hue: 0deg;
+    --d-saturate: 100%;
+    --d-brightness: 100%;
+    --d-blur: 0px;
+    --d-invert: 0%;
+    --d-sepia: 0%;
+    --d-grayscale: 0%;
+    --d-contrast: 100%;
+
+    --sunset01: 0.1;
+
+}
+
+body {
+
+    margin: 0;
+
+}
+
+#bg-land {
+    position: absolute;
+    width: 100%;
+    height: auto;
+
+    z-index: 10;
+
+    /* filter: brightness(var(--sunset01)) */
+}
+
+#bg-sky {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    
+    z-index: -10;
+
+}
+
+.sun-parent {
+    width: 100%;
+    height: 100%;
+}
+
+.sun {
+    position: relative;
+    
+}
+
+#sun-halo {
+    filter: hue-rotate(var(--s-hue)) saturate(var(--s-saturate)) brightness(var(--s-brightness)) blur(var(--s-blur))
+    invert(var(--s-invert)) sepia(var(--s-sepia)) grayscale(var(--s-grayscale)) contrast(var(--s-contrast))
+    ;
+    transform: scale(1);
+    transform-origin: 50%;
+}
+
+#sun-disk {
+    filter: hue-rotate(var(--d-hue)) saturate(var(--d-saturate)) brightness(var(--d-brightness)) blur(var(--d-blur))
+    invert(var(--d-invert)) sepia(var(--d-sepia)) grayscale(var(--d-grayscale)) contrast(var(--d-contrast))
+    ;
+    transform: scale(1);
+    transform-origin: 50%;
+
+}
+
+/* make all elements be positioned on top of each other */
+.sun img {
+    width: 100%;
+    height: auto;
+}
+
+#sun-disk img {
+    z-index: 2;
+}
+
+#lens {
+    z-index: 1;
+}
+#sunset-slider {
+    position:relative;
+    z-index:1000;
+}
+
+#sliders input {
+    width: 600px;
+}
+
+/* render behind everything */
+#bg {
+    z-index: -1;
+
+}
+
+.fixed {
+    position: absolute;
+    top: 0;
+
+
+}
+
+.hide {
+    display: none;
+}
