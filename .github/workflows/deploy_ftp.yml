@@ -15,9 +15,8 @@ jobs:
         username: horatiuromantic.com
         password: ${{ secrets.FTP_PASS }}
         local-dir: ./public/
-        server-dir: ./
+        server-dir: ./sunset/
         exclude: |
           **/.git*
           **/.git*/**
           **/node_modules/**
-          **/unused_workflows/**
