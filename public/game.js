@@ -39,7 +39,7 @@ var sunHalo = document.getElementById("sun-halo");
 var sunHaloImg = sunHalo.getElementsByTagName("img")[0];
 var sunDisk = document.getElementById("sun-disk");
 var sunDiskImg = sunDisk.getElementsByTagName("img")[0];
-var follow = true;
+var follow = false;
 // on keyboard press P
 document.addEventListener('keydown', function (e) {
     if (e.keyCode == 80) {
@@ -109,7 +109,6 @@ const PoorMansAnimationCurve = (values, times, s01) => {
 
 function SetSunset(sunset01) {
     sunset01 = Math.min(lerp(azimuth, horizonY, sunset01), clampSunset);
-    console.log(sunset01);
 
     // calc sun position first
     var sunPos = GetSunPosition(sunset01);
@@ -212,6 +211,9 @@ setInterval(() => {
         timeNormalized = time / (totalTimeS * 1000);
         SetSunset(timeNormalized);
 
+        if (timeNormalized > 1.3) {
+            time = 0;
+        }
     }
 }, dt);
 
