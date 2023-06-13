@@ -36,6 +36,7 @@ if (true) {
         <?php 
             //include "bg_svg.php";
             include "bg_png.php";
+            //include "bg_canvas.php";
         ?>
     </div>
 
@@ -54,19 +55,19 @@ if (true) {
     </div>
 
     <div id="debug" class="fixed">
-        <div id="sunset-slider">
+        <!-- <div id="sunset-slider">
             <input type="range" min="0" max="1000" value="0" class="slider" id="sunset-slider-input">
             <label for="sunset-slider-input">Sunset</label>
-        </div>
+        </div> -->
 
         <!-- color picker top -->
-        <div id="color-picker">
+        <!-- <div id="color-picker">
             <input type="color" id="color-picker-input" value="#a87c9c">
-        </div>
+        </div> -->
         <!-- color picker bottom -->
-        <div id="color-picker-bottom">
+        <!-- <div id="color-picker-bottom">
             <input type="color" id="color-picker-input-bottom" value="#4d6e91">
-        </div>
+        </div> -->
 
         <!-- slider -->
         <div id="sliders" class="hide">
@@ -98,9 +99,9 @@ if (true) {
             </div>
         </div>
     </div>
-    <!-- 
+    
     <script src="TweenMax.min.js"></script>
-    <script src="lensflare.js"></script> -->
+    <script src="lensflare.js"></script>
     <script src="game.js"></script>
 
     <script>

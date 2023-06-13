@@ -1,0 +1,12 @@
+.bg-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fit-screen {
+    width: 100%;
+    height: auto;
+}
