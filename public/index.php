@@ -40,7 +40,9 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
         ?>
     </div>
 
-    <div id="lens" class="fixed"></div>
+    <div class="fixed">
+        <canvas id="lensflare-canvas" class="fixed"></canvas>
+    </div>
 
     <div class="fixed sun-parent">
         <div id="sun-halo" class="sun">
@@ -54,9 +56,11 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
         </div>
     </div>
 
-    <div id="debug" class="fixed above">
+    <div id="debug" class="hide fixed above">
         <button id="do-sunset">Restart Sunset</button>
         <button id="do-mouse-control">Mouse Controls</button>
+
+        <button id="accelerate">Accelerate</button>
 
         <!-- <div id="sunset-slider">
             <input type="range" min="0" max="1000" value="0" class="slider" id="sunset-slider-input">
@@ -103,9 +107,13 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
         </div>
     </div>
     
-    <script src="TweenMax.min.js"></script>
-    <script src="lensflare.js"></script>
+    <!-- <script src="TweenMax.min.js"></script> -->
+    <script src="lensflare2.js"></script>
     <script src="game.js"></script>
+
+    <?php
+        include_once("thinkgame.php");
+    ?>
 
     <script>
 

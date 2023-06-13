@@ -35,6 +35,8 @@ var bgLand = document.getElementById("bg-land");
 // bg-sky
 var bgSky = document.getElementById("bg-sky");
 
+var lensflareCanvas = document.getElementById("lensflare-canvas");
+
 var sunHalo = document.getElementById("sun-halo");
 var sunHaloImg = sunHalo.getElementsByTagName("img")[0];
 var sunDisk = document.getElementById("sun-disk");
@@ -46,16 +48,43 @@ document.addEventListener('keydown', function (e) {
         follow = !follow;
         time = 0;
     }
+
+    // if u press 'd' open debug
+    if (e.keyCode == 68) {
+        var debug = document.getElementById("debug");
+        debug.classList.toggle("hide");
+    }
 });
-//  #sun follow mouse cursor
-document.addEventListener('mousemove', function (e) {
+
+// accelerate button
+var accelerateButton = document.getElementById("accelerate");
+// while pointer is pressed
+accelerateButton.addEventListener("pointerdown", function () {
+    accelerate = true;
+});
+// when pointer is released
+accelerateButton.addEventListener("pointerup", function () {
+    accelerate = false;
+});
+
+
+
+// on pointer down
+document.addEventListener('pointerdown', function (e) {
     if (!follow) return;
     var t = e.clientY / window.innerHeight;
     t = invlerp(azimuth, horizonY, t);
 
     SetSunset(t, e.clientX, e.clientY);
-
 });
+
+//  #sun follow mouse cursor
+// document.addEventListener('mousemove', function (e) {
+//     if (!follow) return;
+//     var t = e.clientY / window.innerHeight;
+//     t = invlerp(azimuth, horizonY, t);
+//     SetSunset(t, e.clientX, e.clientY);
+// });
 
 if (false) {
     var sunsetSlider = document.getElementById("sunset-slider").getElementsByTagName("input")[0];
@@ -115,7 +144,7 @@ function SetSunset(sunset01) {
     var sunX = sunPos.x;
     var sunY = sunPos.y;
 
-    var scale = (0.2 + 0.5 * sunset01);
+    var scale = (0.1 + 0.3 * sunset01);
 
     var sunWidth = sunHaloImg.width;
     var sunHeight = sunHaloImg.height;
@@ -132,6 +161,15 @@ function SetSunset(sunset01) {
     var sunSaturateTimes =  [0, 0.5,    0.8,    0.9,   1,   4];
     var haloOpacityTimes =  [0, 0.5, 0.8, 0.9,  1, 1.5,  4];
     var haloOpacityValues = [1, 0.9, 0.8, 0.6, 0.3, 0.1, 0];
+
+    var flareOpacityTimes =  [0, 0.35, 0.55,  4];
+    var flareOpacityValues = [0.8, 1, 0, 0];
+
+    // lensflareCanvas
+    {
+        lensflareCanvas.style.opacity = PoorMansAnimationCurve(flareOpacityValues, flareOpacityTimes, sunset01);
+
+    }
 
     // sun halo
     {
@@ -192,6 +230,15 @@ function SetSunset(sunset01) {
         bgSky.style.filter = "hue-rotate(" + hueSky + "deg) saturate(" + saturateSky + "%) brightness(" + briSky + "%) blur(" + blur + "px)";
     }
 
+
+    // trigger custom 'sunset' event on document
+    var sunsetEvent = new CustomEvent('sunset', { detail: {
+            sunset01: sunset01,
+            sunX: sunX,
+            sunY: sunY
+        }
+     });
+    document.dispatchEvent(sunsetEvent);
 }
 
 
@@ -202,16 +249,21 @@ SetSunset(0, screen.width * 0.33, screen.height * 0);
 
 // time in ms
 var time = 0;
+var accelerate = false;
 var dt = 1000 / 60;
 var timeNormalized = 0;
-var totalTimeS = 5;
+var totalTimeS = 50;
 setInterval(() => {
     if (!follow) {
         time += dt;
+        if (accelerate)
+        {
+            time += totalTimeS * 1000 / 60;
+        }
         timeNormalized = time / (totalTimeS * 1000);
         SetSunset(timeNormalized);
 
-        if (timeNormalized > 1.3) {
+        if (timeNormalized > 1.5) {
             time = 0;
         }
     }
