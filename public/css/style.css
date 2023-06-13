@@ -23,36 +23,10 @@
     --sunset01: 0.1;
 
 }
-
 body {
 
     margin: 0;
 
-}
-
-.bg-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@media screen and (orientation: landscape) {
-    .fit-screen {
-        width:100%;
-        height:auto;
-        min-width: 100vw;
-        min-height: 100vh;
-    }
-}
-@media screen and (orientation: portrait) {
-    .fit-screen {
-        width:auto;
-        height:100%;
-        min-width: 100vw;
-        min-height: 100vh;   
-    }
 }
 
 #bg-land {
