@@ -1,6 +1,6 @@
-<img id="bg-land" class="fit-screen" src="img/bg/sunset_sq_land.png" />
+<img id="bg-land" class="fit-screen" src="img/bg/sunset_land50.png" />
 
-<img id="bg-sky" class="fit-screen" src="img/bg/sunset_sq_sky.png" />
+<img id="bg-sky" class="fit-screen" src="img/bg/sunset_sky50.png" />
 
 <!-- <img id="bg-water" class="fit-screen" src="img/bg/sunset_sq_water.png" /> -->
 

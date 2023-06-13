@@ -1,10 +1,10 @@
 <?php
 // if we are running on localhost, use this. else use "1.0" and update by hand.
-// if ($_SERVER['HTTP_HOST'] == "localhost") 
-if (true) {
+if ($_SERVER['HTTP_HOST'] == "localhost") {
+// if (true) {
     $css_version = "t" . time();
 } else {
-    $css_version = "1.0";
+    $css_version = "1.2";
 }
 ?>
 <html>
