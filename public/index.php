@@ -44,13 +44,13 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
         <canvas id="lensflare-canvas" class="fixed"></canvas>
     </div>
 
-    <div class="fixed sun-parent">
+    <div class="hide fixed sun-parent">
         <div id="sun-halo" class="sun">
             <img src="img/sunr.png" alt="sun">
         </div>
         
     </div>
-    <div class="fixed sun-parent">
+    <div class="hide fixed sun-parent">
         <div id="sun-disk" class="sun">
             <img src="img/sundisk.png" alt="sun">
         </div>
@@ -107,18 +107,29 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
         </div>
     </div>
     
+
+    <script>
+        // show all sun parents
+        function onColorsLoaded()
+        {
+            // show all sun parents
+            var sunParents = document.getElementsByClassName("sun-parent");
+            for (var i = 0; i < sunParents.length; i++) {
+                sunParents[i].classList.remove("hide");
+
+            }
+        }
+    </script>
+
     <!-- <script src="TweenMax.min.js"></script> -->
     <script src="lensflare2.js"></script>
-    <script src="https://colorjs.io/dist/color.global.js"></script>
+    <!-- on load colorsjs, do a function -->
+    <script src="https://colorjs.io/dist/color.global.js" onload="onColorsLoaded()" ></script>
     <script src="game.js"></script>
 
     <?php
         include_once("thinkgame.php");
     ?>
-
-    <script>
-
-    </script>
 
 </body>
 

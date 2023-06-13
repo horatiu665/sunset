@@ -18,6 +18,11 @@
     background-color: var(--sunset-color-avg);
     color: #000000;
     border: 0.2rem solid #000;
+}
+
+#think:hover {
+    background-color: #000000;
+    color: var(--sunset-color-avg);
     cursor: pointer;
 }
 

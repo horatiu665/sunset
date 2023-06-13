@@ -204,8 +204,10 @@ function SetSunset(newSunset01) {
     var flareOpacityValues = [0.8, 1, 0, 0];
 
     // lensflareCanvas
+    var lensflareOpacity = 0;
     {
-        lensflareCanvas.style.opacity = PoorMansAnimationCurve(flareOpacityValues, flareOpacityTimes, sunset01);
+        lensflareOpacity = PoorMansAnimationCurve(flareOpacityValues, flareOpacityTimes, sunset01);
+        lensflareCanvas.style.opacity = lensflareOpacity;
 
     }
 
@@ -240,7 +242,7 @@ function SetSunset(newSunset01) {
 
         // var saturate = 0 + Math.max(0, s01 * 80);
         var brightness = 350 - Math.pow(Math.max(0.01, s01), 1.7) * 100;
-        var blur = Math.max(0, s01 * 1);
+        var blur = Math.max(0, s01 * 5);
         //var contrast = sunset01 * 100;
 
         document.documentElement.style.setProperty('--d-hue', hue + "deg");
@@ -269,16 +271,26 @@ function SetSunset(newSunset01) {
     }
 
 
-    // trigger custom 'sunset' event on document
-    var sunsetEvent = new CustomEvent('sunset', { detail: {
-            sunset01: sunset01,
-            sunX: sunX,
-            sunY: sunY
-        }
-     });
-    document.dispatchEvent(sunsetEvent);
+    if (lensflareOpacity > 0) {
+        // trigger custom 'sunset' event on document
+        var sunsetEvent = new CustomEvent('sunset', { detail: {
+                sunset01: sunset01,
+                sunX: sunX,
+                sunY: sunY
+            }
+        });
+        document.dispatchEvent(sunsetEvent);
+    } else {
+        // trigger custom 'sunset' event on document
+        var sunsetEvent = new CustomEvent('sunset', { detail: {
+                sunset01: 0,
+                sunX: 0,
+                sunY: 0
+            }
+        });
+        document.dispatchEvent(sunsetEvent);
+    }
 }
-
 
 
 
@@ -291,23 +303,45 @@ var accelerate = false;
 var dt = 1000 / 60;
 var timeNormalized = 0;
 var totalTimeS = 50;
-setInterval(() => {
-    if (!follow) {
-        time += dt;
-        if (accelerate)
-        {
-            time += totalTimeS * 1000 / 60;
-        }
-        timeNormalized = time / (totalTimeS * 1000);
-        SetSunset(timeNormalized);
+var gameUpdateInterval = null;
+function StartGame() { 
+    gameUpdateInterval = setInterval(() => {
+        if (!follow) {
+            time += dt;
+            if (accelerate)
+            {
+                time += totalTimeS * 1000 / 60;
+            }
+            timeNormalized = time / (totalTimeS * 1000);
+            SetSunset(timeNormalized);
 
-        if (timeNormalized > 1.5) {
-            time = 0;
+            if (timeNormalized > 1.5) {
+                clearInterval(gameUpdateInterval);
+                gameUpdateInterval = null;
+                OnGameOver();
+            }
         }
+    }, dt);
+}
+
+StartGame();
+
+function OnGameOver() {
+    if (true) {
+        var gameOver = document.getElementById("gameover");
+        gameOver.classList.remove("hide");
+        gameOver.classList.add("show");
+
+        var thinkgame = document.getElementById("thinkgame");
+        gameOver.classList.add("hide");
+        gameOver.classList.remove("show");
+
+
     }
-}, dt);
-
-
+    else {
+        StartGame();
+    }
+}
 
 // do-sunset button
 var doSunsetButton = document.getElementById("do-sunset");

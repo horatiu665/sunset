@@ -115,10 +115,22 @@ body {
     position: absolute;
     top: 0;
 
-
 }
 
 .hide {
     display: none;
 }
 
+/* opacity anim */
+.show {
+    animation: show 1s ease-in-out forwards;
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
