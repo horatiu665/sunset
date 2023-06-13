@@ -1,0 +1,26 @@
+
+#thinkgame {
+    width: 80%;
+    height: 80%;
+    margin: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+}
+
+#think {
+    font-size: 2rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--sunset-color-avg);
+    color: #000000;
+    border: 0.2rem solid #000;
+    cursor: pointer;
+}
+
+#think-text {
+    color: var(--text-color);
+}

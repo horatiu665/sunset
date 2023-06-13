@@ -1,3 +1,4 @@
+var sunset01 = 0;
 
 var azimuth = -0.1;
 var horizonY = 0.7;

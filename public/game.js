@@ -74,8 +74,8 @@ document.addEventListener('pointerdown', function (e) {
     if (!follow) return;
     var t = e.clientY / window.innerHeight;
     t = invlerp(azimuth, horizonY, t);
-
     SetSunset(t, e.clientX, e.clientY);
+    console.log(sunset01);
 });
 
 //  #sun follow mouse cursor
@@ -136,8 +136,22 @@ const PoorMansAnimationCurve = (values, times, s01) => {
     return values[0];
 };
 
-function SetSunset(sunset01) {
-    sunset01 = Math.min(lerp(azimuth, horizonY, sunset01), clampSunset);
+const PoorMansAnimationCurveColor = (colors, times, s01) => {
+    for (var i = 0; i < colors.length; i++) {
+        var color = colors[i];
+        var time = times[i];
+        var nextColor = colors[(i + 1) % colors.length]; // consider clamping
+        var nextTime = times[(i + 1) % colors.length];
+        if (s01 >= time && s01 <= nextTime) {
+            var v = Color.mix(color, nextColor, invlerp(time, nextTime, s01));
+            return v;
+        }
+    }
+    return colors[0];
+};
+
+function SetSunset(newSunset01) {
+    sunset01 = Math.min(lerp(azimuth, horizonY, newSunset01), clampSunset);
 
     // calc sun position first
     var sunPos = GetSunPosition(sunset01);
@@ -153,6 +167,30 @@ function SetSunset(sunset01) {
     var x = sunX - sunWidth / 2;
     SetScale(sunHalo, x, y, scale);
     SetScale(sunDisk, x, y, scale);
+
+    // think game
+    {
+        var textColors = [
+            new Color("#fffdf5"),
+            new Color("#fff2d9"),
+            new Color("#ff8669"),
+            new Color("#ff2e13"),
+            new Color("#ff2e13"),
+            new Color("#777777"),
+            new Color("#000000"),
+        ];
+        var textTimes = [0, 0.47, 0.6, 0.73, 0.88, 1, 4];
+        var textColor = PoorMansAnimationCurveColor(textColors, textTimes, sunset01);
+        document.documentElement.style.setProperty('--text-color', textColor.toString({format: "hex"}));
+        
+        var skyColors = [
+            new Color("#71a9ff"),
+            new Color("#b26ed8"),
+        ];
+        // set --sunset-color-avg variable
+        var sunsetColorAvg = Color.mix(skyColors[0], skyColors[1], sunset01);
+        document.documentElement.style.setProperty('--sunset-color-avg', sunsetColorAvg.toString({format: "hex"}));
+    }
 
     // anim curves (poor man's)
     var sunHueValues = [35, 15, 8, 0, 0];

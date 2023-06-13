@@ -109,6 +109,7 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
     
     <!-- <script src="TweenMax.min.js"></script> -->
     <script src="lensflare2.js"></script>
+    <script src="https://colorjs.io/dist/color.global.js"></script>
     <script src="game.js"></script>
 
     <?php

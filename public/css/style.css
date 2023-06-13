@@ -22,6 +22,8 @@
 
     --sunset01: 0.1;
 
+    --sunset-color-avg: #ff8c00;
+    --text-color: #fff;
 }
 body {
 
@@ -119,3 +121,4 @@ body {
 .hide {
     display: none;
 }
+
