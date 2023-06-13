@@ -99,7 +99,7 @@ function SetSunset(sunset01, sunX, sunY)
         sunHaloImg.style.opacity = Math.min(1, Math.max(0, 1.3 - sunset01));
         
         var hue = 33 - sunset01 * 5;
-        var saturate = 60 - sunset01 * 30;
+        var saturate = 40 + sunset01 * 30;
         var brightness = 350 - Math.pow(sunset01, 2) * 100;
         var blur = sunset01 * 300;
         //var contrast = sunset01 * 100;
@@ -116,7 +116,7 @@ function SetSunset(sunset01, sunX, sunY)
         sunDiskImg.style.opacity = 1;
 
         var hue = 33 - sunset01 * 25;
-        var saturate = 60 - sunset01 * 30;
+        var saturate = 40 + sunset01 * 40;
         var brightness = 350 - Math.pow(sunset01, 2) * 100;
         var blur = sunset01 * 1;
         //var contrast = sunset01 * 100;
@@ -131,7 +131,7 @@ function SetSunset(sunset01, sunX, sunY)
 
     // land
     {
-        var hue = 0 - sunset01 * 5;
+        var hue =  +sunset01 * 35;
         var saturate = 100 + sunset01 * 10;
         var brightness = 100 - Math.pow(sunset01, 2) * 30;
         var blur = 0; //sunset01 * 1;

@@ -32,7 +32,7 @@ if (true) {
 
 <body>
 
-    <div id="bg">
+    <div id="bg" class="bg-container">
         <?php 
             //include "bg_svg.php";
             include "bg_png.php";
