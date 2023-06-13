@@ -30,6 +30,9 @@ if (bg != null) {
     }
 }
 
+var gameOver = document.getElementById("gameover");
+var thinkgame = document.getElementById("thinkgame");
+
 // bg-land
 var bgLand = document.getElementById("bg-land");
 // bg-sky
@@ -272,13 +275,15 @@ function SetSunset(newSunset01) {
 
 
     if (lensflareOpacity > 0) {
-        // trigger custom 'sunset' event on document
-        var sunsetEvent = new CustomEvent('sunset', { detail: {
-                sunset01: sunset01,
+        var data = { 
+            detail: {
+                sunset01: clamp(sunset01),
                 sunX: sunX,
                 sunY: sunY
             }
-        });
+        };
+        // trigger custom 'sunset' event on document
+        var sunsetEvent = new CustomEvent('sunset', data);
         document.dispatchEvent(sunsetEvent);
     } else {
         // trigger custom 'sunset' event on document
@@ -294,9 +299,6 @@ function SetSunset(newSunset01) {
 
 
 
-// init game
-SetSunset(0, screen.width * 0.33, screen.height * 0);
-
 // time in ms
 var time = 0;
 var accelerate = false;
@@ -305,7 +307,12 @@ var timeNormalized = 0;
 var totalTimeS = 50;
 var gameUpdateInterval = null;
 function StartGame() { 
-    gameUpdateInterval = setInterval(() => {
+    time = 0;
+    SetSunset(0);
+    
+    SetGameOverVisibility(false);
+
+    gameUpdateInterval = setInterval(function () {
         if (!follow) {
             time += dt;
             if (accelerate)
@@ -326,28 +333,41 @@ function StartGame() {
 
 StartGame();
 
-function OnGameOver() {
-    if (true) {
-        var gameOver = document.getElementById("gameover");
+function SetGameOverVisibility(gameOverVisible) {
+
+    if (gameOverVisible){
         gameOver.classList.remove("hide");
         gameOver.classList.add("show");
-
-        var thinkgame = document.getElementById("thinkgame");
-        gameOver.classList.add("hide");
+        gameOver.classList.add("vertical");
+        
+        thinkgame.classList.add("hide");
+        thinkgame.classList.remove("vertical");
+        thinkgame.classList.remove("show");
+    } else {
         gameOver.classList.remove("show");
+        gameOver.classList.remove("vertical");
+        gameOver.classList.add("hide");
+        
+        thinkgame.classList.add("show");
+        thinkgame.classList.add("vertical");
+        thinkgame.classList.remove("hide");
+    }
 
+}
 
+function OnGameOver() {
+    if (true) {
+        SetGameOverVisibility(true);
     }
     else {
         StartGame();
     }
 }
 
-// do-sunset button
-var doSunsetButton = document.getElementById("do-sunset");
-doSunsetButton.addEventListener("click", function () {
-    follow = false;
-    time = 0;
+// do-restart-sunset button
+var doRestartSunsetButton = document.getElementById("do-restart-sunset");
+doRestartSunsetButton.addEventListener("click", function () {
+    StartGame();
 });
 
 // do-mouse-control button

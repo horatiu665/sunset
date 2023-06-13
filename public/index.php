@@ -57,7 +57,7 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
     </div>
 
     <div id="debug" class="hide fixed above">
-        <button id="do-sunset">Restart Sunset</button>
+        <button id="do-restart-sunset">Restart Sunset</button>
         <button id="do-mouse-control">Mouse Controls</button>
 
         <button id="accelerate">Accelerate</button>
@@ -121,15 +121,15 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
         }
     </script>
 
+    <?php
+        include_once("thinkgame.php");
+    ?>
+
     <!-- <script src="TweenMax.min.js"></script> -->
     <script src="lensflare2.js"></script>
     <!-- on load colorsjs, do a function -->
     <script src="https://colorjs.io/dist/color.global.js" onload="onColorsLoaded()" ></script>
     <script src="game.js"></script>
-
-    <?php
-        include_once("thinkgame.php");
-    ?>
 
 </body>
 

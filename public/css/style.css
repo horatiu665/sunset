@@ -26,9 +26,10 @@
     --text-color: #fff;
 }
 body {
-
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     margin: 0;
-
 }
 
 #bg-land {
@@ -129,8 +130,14 @@ body {
 @keyframes show {
     0% {
         opacity: 0;
+        display: none;
     }
     100% {
         opacity: 1;
+        display: initial;
     }
+}
+
+.hide-anim {
+    animation: show 1s ease-in-out forwards reverse;
 }
