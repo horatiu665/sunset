@@ -60,16 +60,18 @@ body {
 }
 
 #sun-halo {
-    filter: hue-rotate(var(--s-hue)) saturate(var(--s-saturate)) brightness(var(--s-brightness)) blur(var(--s-blur))
-    invert(var(--s-invert)) sepia(var(--s-sepia)) grayscale(var(--s-grayscale)) contrast(var(--s-contrast))
+    filter: hue-rotate(var(--s-hue)) saturate(var(--s-saturate)) brightness(var(--s-brightness))
+    /* blur(var(--s-blur)) */
+    contrast(var(--s-contrast))
     ;
     transform: scale(1);
     transform-origin: 50%;
 }
 
 #sun-disk {
-    filter: hue-rotate(var(--d-hue)) saturate(var(--d-saturate)) brightness(var(--d-brightness)) blur(var(--d-blur))
-    invert(var(--d-invert)) sepia(var(--d-sepia)) grayscale(var(--d-grayscale)) contrast(var(--d-contrast))
+    filter: hue-rotate(var(--d-hue)) saturate(var(--d-saturate)) brightness(var(--d-brightness)) 
+    /* blur(var(--d-blur)) */
+    contrast(var(--d-contrast))
     ;
     transform: scale(1);
     transform-origin: 50%;

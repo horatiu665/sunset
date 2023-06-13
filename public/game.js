@@ -96,6 +96,8 @@ function SetSunset(sunset01, sunX, sunY)
 
     // sun 
     {
+        sunHaloImg.style.opacity = Math.min(1, Math.max(0, 1.3 - sunset01));
+        
         var hue = 33 - sunset01 * 5;
         var saturate = 60 - sunset01 * 30;
         var brightness = 350 - Math.pow(sunset01, 2) * 100;
