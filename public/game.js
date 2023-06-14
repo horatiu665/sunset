@@ -300,6 +300,7 @@ function SetSunset(timeNorm) {
 }
 
 
+var num_thinking_slow = 3;
 
 // time in ms
 var time = 0;

@@ -1,3 +1,7 @@
+:root {
+    --thinkgame-transition-duration: 1s;
+}
+
 .vertical {
     display: flex;
     flex-direction: column;
@@ -17,13 +21,14 @@
     font-size: 2rem;
 }
 
-#think {
-    font-size: 2rem;
-    padding: 1rem;
+.think-button {
+
+    margin: 0.5rem;
+    padding: 0.5rem;
     border-radius: 1rem;
     background-color: var(--sunset-color-avg);
     color: #000000;
-    border: 0.2rem solid #000;
+    border: 1px solid #000;
 
     /* cannot select text */
     -webkit-touch-callout: none; /* iOS Safari */
@@ -35,7 +40,12 @@
 
 }
 
-#think:hover {
+#think {
+    font-size: 2rem;
+    padding:1rem;
+}
+
+.think-button:hover {
     background-color: #000000;
     color: var(--sunset-color-avg);
     cursor: pointer;
@@ -53,11 +63,12 @@
     font-size: 1.2rem;
     font-family: 'EB Garamond', serif;
     opacity: 0.75;
+
 }
 
 
 .slow-hide {
-    animation: slow-hide 1s ease-in-out forwards;
+    animation: slow-hide var(--thinkgame-transition-duration) ease-in-out forwards;
 }
 @keyframes slow-hide {
     0% {
@@ -70,7 +81,7 @@
     }
 }
 .slow-show {
-    animation: slow-show 1s ease-in-out forwards;
+    animation: slow-show var(--thinkgame-transition-duration) ease-in-out forwards;
 }
 @keyframes slow-show {
     0% {
@@ -159,4 +170,12 @@
 
 #gameover h2 {
     color: var(--text-color);
+    font-size: 2rem;
+}
+
+
+#gameover h3 {
+    color: var(--text-color);
+    font-size: 1.5rem;
+
 }

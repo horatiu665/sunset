@@ -2,7 +2,8 @@
     <div id="thinkgame" class="hide fixed above">
         <h2 id="think-text">Press the button to think about life.</h2>
 
-        <button id="think">Press to think</button>
+        <button id="think" class="think-button">Press to think</button>
+        <button id="think-faster" class="think-button">Think faster</button>
 
         <div id="author">
 
@@ -35,6 +36,7 @@
 
 <script>
     var think = document.getElementById("think");
+    var thinkFaster = document.getElementById("think-faster");
     var thinkText = document.getElementById("think-text");
     var author = document.getElementById("author");
     var yourThoughtsContainer = document.getElementById("your-thoughts-goes-here");
@@ -43,62 +45,76 @@
         NextSentence();
     });
 
+    thinkFaster.addEventListener("click", function () {
+        NextSentence("fast");
+    });
+
+    function SlowHide(comp) {
+        comp.classList.add("slow-hide");
+        comp.classList.remove("slow-show");
+    }
+    function SlowShow(comp, showAgainDelay = 0) {
+        // show think button
+        comp.classList.remove("slow-hide");
+        comp.classList.add("slow-show");
+
+        if (showAgainDelay > 0) {
+            setTimeout(() => {
+                comp.classList.remove("slow-show");
+
+            }, showAgainDelay);
+        }
+    }
+
     // restart button
     var restart = document.getElementById("restart");
     restart.addEventListener("click", () => OnRestartButtonPress());
 
-    function NextSentence() {
+    function NextSentence(speed = "slow") {
 
         var ts = GetCurrentSentenceObj();
 
         // if it has "anim" number, we should multiply the delay by it
         var delay = 2000;
-        if (ts.hasOwnProperty('anim')) {
-            delay *= ts['anim'];
+        if (speed == "slow") {
+            document.documentElement.style.setProperty('--thinkgame-transition-duration', '1s');
+        }
+        if (speed == "fast") {
+            delay = 330;
+            document.documentElement.style.setProperty('--thinkgame-transition-duration', (delay / 1000) + 's');
         }
 
         // hide think button
-        think.classList.add("slow-hide");
-        think.classList.remove("slow-show");
-        author.classList.add("slow-hide");
-        author.classList.remove("slow-show");
+        SlowHide(think);
+        SlowHide(thinkFaster);
+        SlowHide(author);
 
         // wait 3 sec
         var delay1 = delay;
         setTimeout(function () {
 
             // hide think text
-            thinkText.classList.remove("slow-show");
-            thinkText.classList.add("slow-hide");
+            SlowHide(thinkText);
 
             var delay2 = delay;
             setTimeout(() => {
 
-                RecordThought(GetCurrentSentenceObj());
+                RecordThought(GetCurrentSentenceObj(), speed);
 
                 // change sentence to new
                 thinkText.innerHTML = GetNextSentence();
                 authorText.innerHTML = GetAuthor();
 
                 // show think text
-                thinkText.classList.remove("slow-hide");
-                thinkText.classList.add("slow-show");
-
-                author.classList.remove("slow-hide");
-                author.classList.add("slow-show");
+                SlowShow(thinkText);
+                SlowShow(author);
 
                 var delay3 = delay;
                 setTimeout(() => {
                     if (!_is_dead) {
-                        // show think button
-                        think.classList.remove("slow-hide");
-                        think.classList.add("slow-show");
-
-                        var delay4 = 1000;
-                        setTimeout(() => {
-                            think.classList.remove("slow-show");
-
-                        }, delay4);
+                        var delay4 = delay / 2;
+                        SlowShow(think, delay4);
+                        SlowShow(thinkFaster, delay4);
                     }
 
                 }, delay3);
@@ -115,35 +131,48 @@
 
     }
 
-    function RecordThought(tho) {
+    function RecordThought(tho, speed = "slow") {
+
+        // clone tho
+        var newTho = JSON.parse(JSON.stringify(tho));
+        newTho.speed = speed;
 
         // add to youWereThinking array
-        youWereThinking.push(tho);
+        youWereThinking.push(newTho);
 
     }
 
     function SetYourThoughtsStraight() {
         // record final thought...?!?!
-        RecordThought(GetCurrentSentenceObj());
+        RecordThought(GetCurrentSentenceObj(), "final");
 
         yourThoughtsContainer.innerHTML = "";
         for (var i = 0; i < youWereThinking.length; i++) {
             var tho = youWereThinking[i];
-            var h2 = document.createElement("h2");
-            //h2.classList.add("your-thought");
+
+            var elementType = "h2";
+            if (tho['speed'] == "fast")
+                elementType = "h3";
+
+            var thoughtElement = document.createElement(elementType);
+            //thoughtElement.classList.add("your-thought");
             var sentence = "You thought about ";
+            if (tho['speed'] == "fast")
+                sentence = "You briefly thought about ";
+
             if (tho.hasOwnProperty("noprefix"))
                 sentence = "";
-            if (tho.hasOwnProperty("thinkabout"))
+
+
+            if (tho.hasOwnProperty("history"))
+                sentence = tho['history'];
+            else if (tho.hasOwnProperty("thinkabout"))
                 sentence += tho['thinkabout'];
             else
                 sentence += "life.";
 
-            if (tho.hasOwnProperty("history"))
-                sentence = tho['history'];
-
-            h2.innerHTML = sentence;
-            yourThoughtsContainer.appendChild(h2);
+            thoughtElement.innerHTML = sentence;
+            yourThoughtsContainer.appendChild(thoughtElement);
         }
     }
 

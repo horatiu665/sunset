@@ -8,7 +8,7 @@ var scramble = false;
 var thinkSentences = [
     { "prio": 0, "noprefix": true, "thinkabout": "Press the button to think about life.", "history": "You thought about life.", "author": "Horațiu" },
     { "prio": 1, "thinkabout": "this moment.", "author": "Horațiu" },
-    { "prio": 1, "thinkabout": "someone you love and wish they were here.", "history": "You thought about someone you love and wished they were here.", "author": "Horațiu" },
+    { "prio": 1, "thinkabout": "someone you love and wish they were here.", "history": "someone you love and wished they were here.", "author": "Horațiu" },
     { "prio": 1, "thinkabout": "the bugs.", "author": "Friedemann" },
     { "prio": 1, "thinkabout": "how space is expanding but is also boundless.", "author": "Marlene" },
     { "prio": 1, "thinkabout": "the sunshine.", "author": "Horațiu" },
