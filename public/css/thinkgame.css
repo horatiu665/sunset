@@ -1,14 +1,18 @@
 .vertical {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     align-items: center;
+    text-align: center;
 }
 
 #thinkgame {
     width: 80%;
     height: 80%;
-    margin: 10%;
+    margin-top: 35vh;
+    margin-bottom: 25vh;
+    margin-left: 10vw;
+    margin-right: 10vw;
 
     font-size: 2rem;
 }
@@ -20,6 +24,15 @@
     background-color: var(--sunset-color-avg);
     color: #000000;
     border: 0.2rem solid #000;
+
+    /* cannot select text */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    
 }
 
 #think:hover {
@@ -32,7 +45,32 @@
     color: var(--text-color);
 }
 
-
+.slow-hide {
+    animation: slow-hide 1s ease-in-out forwards;
+}
+@keyframes slow-hide {
+    0% {
+        opacity: 1;
+        pointer-events: none;
+    }
+    100% {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+.slow-show {
+    animation: slow-show 1s ease-in-out forwards;
+}
+@keyframes slow-show {
+    0% {
+        opacity: 0;
+        pointer-events: none;
+    }
+    100% {
+        opacity: 1;
+        pointer-events: none;
+    }
+}
 
 #gameover {
     width: 80%;

@@ -1,6 +1,6 @@
 
 <div id="think-parent">
-    <div id="thinkgame" class="fixed above vertical">
+    <div id="thinkgame" class="hide fixed above vertical">
         <h2 id="think-text">Press the button to think about life.</h2>
 
         <button id="think">Press to think</button>
@@ -39,22 +39,47 @@ restart.addEventListener("click", function() {
 
 function NextSentence() {
     // hide think button
-    think.classList.add("hide-anim");
-    think.classList.remove("show");
+    think.classList.add("slow-hide");
+    think.classList.remove("slow-show");
 
     // wait 3 sec
+    var delay1 = 2000;
     setTimeout(function() {
 
-        // change sentence to new
-        thinkText.innerHTML = "Press the button to think about another life.";
+        thinkText.classList.remove("slow-show");
+        thinkText.classList.add("slow-hide");
 
+        var delay2 = 2000;
+        setTimeout(() => {
+                
+            // change sentence to new
+            thinkText.innerHTML = GetNextSentence();
 
-        // show think button
-        think.classList.add("show");
-        think.classList.remove("hide-anim");
+            thinkText.classList.remove("slow-hide");
+            thinkText.classList.add("slow-show");
 
-    }, 3000);
+            var delay3 = 2000;
+            setTimeout(() => {
+                // show think button
+                think.classList.remove("slow-hide");
+                think.classList.add("slow-show");
+                
+                var delay4 = 1000;
+                setTimeout(() => {
+                    think.classList.remove("slow-show");
 
+                }, delay4);
+            
+            }, delay3);
+            
+        }, delay2);
+
+    }, delay1);
+
+}
+
+function GetNextSentence() {
+    return "BLABLA" + Math.random();
 }
 
 </script>

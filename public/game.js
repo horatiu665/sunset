@@ -184,26 +184,26 @@ function SetSunset(newSunset01) {
         ];
         var textTimes = [0, 0.47, 0.6, 0.73, 0.88, 1, 4];
         var textColor = PoorMansAnimationCurveColor(textColors, textTimes, sunset01);
-        document.documentElement.style.setProperty('--text-color', textColor.toString({format: "hex"}));
-        
+        document.documentElement.style.setProperty('--text-color', textColor.toString({ format: "hex" }));
+
         var skyColors = [
             new Color("#71a9ff"),
             new Color("#b26ed8"),
         ];
         // set --sunset-color-avg variable
         var sunsetColorAvg = Color.mix(skyColors[0], skyColors[1], sunset01);
-        document.documentElement.style.setProperty('--sunset-color-avg', sunsetColorAvg.toString({format: "hex"}));
+        document.documentElement.style.setProperty('--sunset-color-avg', sunsetColorAvg.toString({ format: "hex" }));
     }
 
     // anim curves (poor man's)
     var sunHueValues = [35, 15, 8, 0, 0];
     var sunHueTimes = [0, 0.5, 0.8, 1, 4];
-    var sunSaturateValues = [0, 10,     20,     42,    70, 300];
-    var sunSaturateTimes =  [0, 0.5,    0.8,    0.9,   1,   4];
-    var haloOpacityTimes =  [0, 0.5, 0.8, 0.9,  1, 1.5,  4];
+    var sunSaturateValues = [0, 10, 20, 42, 70, 300];
+    var sunSaturateTimes = [0, 0.5, 0.8, 0.9, 1, 4];
+    var haloOpacityTimes = [0, 0.5, 0.8, 0.9, 1, 1.5, 4];
     var haloOpacityValues = [1, 0.9, 0.8, 0.6, 0.3, 0.1, 0];
 
-    var flareOpacityTimes =  [0, 0.35, 0.55,  4];
+    var flareOpacityTimes = [0, 0.35, 0.55, 4];
     var flareOpacityValues = [0.8, 1, 0, 0];
 
     // lensflareCanvas
@@ -275,7 +275,7 @@ function SetSunset(newSunset01) {
 
 
     if (lensflareOpacity > 0) {
-        var data = { 
+        var data = {
             detail: {
                 sunset01: clamp(sunset01),
                 sunX: sunX,
@@ -287,7 +287,8 @@ function SetSunset(newSunset01) {
         document.dispatchEvent(sunsetEvent);
     } else {
         // trigger custom 'sunset' event on document
-        var sunsetEvent = new CustomEvent('sunset', { detail: {
+        var sunsetEvent = new CustomEvent('sunset', {
+            detail: {
                 sunset01: 0,
                 sunX: 0,
                 sunY: 0
@@ -306,17 +307,16 @@ var dt = 1000 / 60;
 var timeNormalized = 0;
 var totalTimeS = 50;
 var gameUpdateInterval = null;
-function StartGame() { 
+function StartGame() {
     time = 0;
     SetSunset(0);
-    
+
     SetGameOverVisibility(false);
 
     gameUpdateInterval = setInterval(function () {
         if (!follow) {
             time += dt;
-            if (accelerate)
-            {
+            if (accelerate) {
                 time += totalTimeS * 1000 / 60;
             }
             timeNormalized = time / (totalTimeS * 1000);
@@ -331,15 +331,13 @@ function StartGame() {
     }, dt);
 }
 
-StartGame();
-
 function SetGameOverVisibility(gameOverVisible) {
 
-    if (gameOverVisible){
+    if (gameOverVisible) {
         gameOver.classList.remove("hide");
         gameOver.classList.add("show");
         gameOver.classList.add("vertical");
-        
+
         thinkgame.classList.add("hide");
         thinkgame.classList.remove("vertical");
         thinkgame.classList.remove("show");
@@ -347,7 +345,7 @@ function SetGameOverVisibility(gameOverVisible) {
         gameOver.classList.remove("show");
         gameOver.classList.remove("vertical");
         gameOver.classList.add("hide");
-        
+
         thinkgame.classList.add("show");
         thinkgame.classList.add("vertical");
         thinkgame.classList.remove("hide");
@@ -375,3 +373,31 @@ var doMouseControlButton = document.getElementById("do-mouse-control");
 doMouseControlButton.addEventListener("click", function () {
     follow = true;
 });
+
+function ShowAllSunParents(vis = true) {
+    // show all sun parents
+    var sunParents = document.getElementsByClassName("sun-parent");
+    for (var i = 0; i < sunParents.length; i++) {
+        if (vis) {
+            sunParents[i].classList.remove("hide");
+        }
+        else {
+            sunParents[i].classList.add("hide");
+        }
+    }
+}
+
+// first game start
+var gameStartTime = 0;
+var gameStartInterval = setInterval(() => {
+    gameStartTime += 500;
+    if (!colorsJsLoaded)
+        return;
+
+    if (gameStartTime < 3000)
+        return;
+
+    clearInterval(gameStartInterval);
+    StartGame();
+
+}, 500);
