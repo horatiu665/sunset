@@ -109,16 +109,13 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
     
 
     <script>
+        var colorsJsLoaded = false;
         // show all sun parents
         function onColorsLoaded()
         {
-            // show all sun parents
-            var sunParents = document.getElementsByClassName("sun-parent");
-            for (var i = 0; i < sunParents.length; i++) {
-                sunParents[i].classList.remove("hide");
-
-            }
+            colorsJsLoaded = true;
         }
+        
     </script>
 
     <?php
