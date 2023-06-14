@@ -1,5 +1,7 @@
 :root {
     /* colors */
+    --c-first-blue: #71a9ff;
+    --c-last-purple: #b26ed8;
 
     /* vars */
     --s-hue: 0deg;
@@ -24,6 +26,7 @@
 
     --sunset-color-avg: #ff8c00;
     --text-color: #fff;
+    --menu-button-color: var(--c-first-blue);
 }
 body {
     width: 100%;
@@ -144,4 +147,8 @@ body {
 
 #debug {
     color: var(--text-color);
+}
+
+.button {
+    font-family: Nunito;
 }

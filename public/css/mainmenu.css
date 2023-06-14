@@ -1,0 +1,53 @@
+
+.mm-vertical {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#main-menu
+{
+    width: 30vw;
+    height: 100%;
+    margin: 0 35vw;
+
+}
+
+#main-menu-icon {
+    width: 10rem;
+    height: 10rem;
+    margin-bottom: 2rem;
+}
+
+.main-menu-button {
+
+    width: 100%;
+
+    font-family: 'Diphylleia', serif;
+    font-size: 1.5rem;
+
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--menu-button-color);
+    color: #000000;
+    border: 1px solid #000;
+
+    /* cannot select text */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+
+}
+
+.main-menu-button:hover {
+    background-color: #ffee55;
+    color: #000000;
+    /* color: var(--menu-button-color); */
+    cursor: pointer;
+}

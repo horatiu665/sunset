@@ -2,33 +2,33 @@
 
 var curThinkSentenceIndex = 0;
 
-var scramble = false;
+var scramble = true;
 
 // format: "Think about ..."
 var thinkSentences = [
     { "prio": 0, "noprefix": true, "thinkabout": "Press the button to think about life.", "history": "You thought about life.", "author": "Horațiu" },
     { "prio": 1, "thinkabout": "this moment.", "author": "Horațiu" },
-    { "prio": 1, "thinkabout": "someone you love and wish they were here.", "history": "someone you love and wished they were here.", "author": "Horațiu" },
+    { "prio": 1, "thinkabout": "someone you love.", "author": "Horațiu" },
     { "prio": 1, "thinkabout": "the bugs.", "author": "Friedemann" },
     { "prio": 1, "thinkabout": "how space is expanding but is also boundless.", "author": "Marlene" },
     { "prio": 1, "thinkabout": "the sunshine.", "author": "Horațiu" },
     { "prio": 1, "thinkabout": "a precious childhood memory.", "author": "Lenja feat. Horațiu" },
     { "prio": 1, "thinkabout": "the last time you were truly happy.", "author": "Github CoPilot" },
-    { "prio": 1, "thinkabout": "your grandparents.", "author": "Friedemann" },
-    { "prio": 1, "thinkabout": "your feet.", "author": "Friedemann" },
-    { "prio": 1, "thinkabout": "a funny cat.", "author": "Horațiu" },
-    { "prio": 1, "thinkabout": "Horațiu.", "author": "Friedemann" },
-    { "prio": 1, "thinkabout": "the last time you felt truly alive.", "author": "Github CoPilot" },
-    { "prio": 1, "thinkabout": "a really good laughter.", "author": "Marlene" },
-    { "prio": 1, "thinkabout": "the last time you felt betrayed.", "author": "Lenja" },
-    { "prio": 1, "thinkabout": "your favorite meal.", "author": "Friedemann" },
-    { "prio": 1, "thinkabout": "Friedemann.", "author": "Horațiu" },
+    { "prio": 3, "thinkabout": "your grandparents.", "author": "Friedemann" },
+    { "prio": 3, "thinkabout": "your feet.", "author": "Friedemann" },
+    { "prio": 3, "thinkabout": "a funny cat.", "author": "Horațiu" },
+    { "prio": 3, "thinkabout": "Horațiu.", "author": "Friedemann" },
+    { "prio": 3, "thinkabout": "the last time you felt truly alive.", "author": "Github CoPilot" },
+    { "prio": 3, "thinkabout": "a really good laughter.", "author": "Marlene" },
+    { "prio": 3, "thinkabout": "the last time you felt betrayed.", "author": "Lenja" },
+    { "prio": 3, "thinkabout": "your favorite meal.", "author": "Friedemann" },
+    { "prio": 3, "thinkabout": "Friedemann.", "author": "Horațiu" },
     
-    { "prio": 1, "thinkabout": "how fast your fingernails are growing.", "author": "Marlene" },
+    { "prio": 5, "thinkabout": "the worst game you ever played.", "author": "Grzegorz" },
+    { "prio": 5, "thinkabout": "this game.", "author": "Horațiu" },
     
-    { "prio": 1, "thinkabout": "the worst game you ever played.", "author": "Grzegorz" },
-    { "prio": 1, "thinkabout": "this game.", "author": "Horațiu" },
-
+    { "prio": 20, "thinkabout": "being on a boat.", "author": "Friedemann" },
+    { "prio": 20, "thinkabout": "how fast your fingernails are growing.", "author": "Marlene" },
     { "prio": 20, "thinkabout": "lemons.", "author": "Friedemann" },
     { "prio": 20, "thinkabout": "a great book.", "author": "Friedemann" },
     { "prio": 20, "thinkabout": "jazz.", "author": "Horațiu" },
@@ -53,14 +53,48 @@ var thinkSentences = [
     { "prio": 20, "thinkabout": "how a small seed can give birth to a mighty tree. Unless it's a carrot seed, then it can give birth to a mighty carrot.", "author": "Tobias feat. Horațiu" },
     { "prio": 20, "thinkabout": "how a small event can change the course of your life.", "author": "Tobias" },
     { "prio": 20, "thinkabout": "the last time you did a game jam in a medieval castle.", "author": "Ernie" },
-    
+
 ];
 
 // same format as thinkSentences. a list of all the ones we thought so far.
 var youWereThinking = [];
 
+function GetNumThoughts() {
+    return youWereThinking.length;
+}
+
 if (scramble) {
-    thinkSentences = shuffle(thinkSentences);
+    thinkSentences = shuffle_prio_thoughts(thinkSentences);
+
+    console.log(thinkSentences);
+}
+
+function shuffle_prio_thoughts(array) {
+    var newArray = [];
+
+    var minPrioForScramble = 6;
+    var latestPrio = 0;
+    var latestIndex = 0;
+    for (let i = 0; i < thinkSentences.length; i++) {
+        var t = thinkSentences[i];
+        var p = t["prio"];
+
+        if (p > minPrioForScramble) {
+            if (p > latestPrio) {
+                latestPrio = p;
+                latestIndex = i;
+            }
+
+            // insert the element in the new array between position latestIndex and the last element.
+            var randomIndex = Math.floor(Math.random() * (newArray.length - latestIndex)) + latestIndex;
+            newArray.splice(randomIndex, 0, t);
+        }
+        else {
+            newArray.push(t);
+        }
+
+    }
+    return newArray;
 }
 
 function shuffle(array) {

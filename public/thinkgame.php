@@ -3,22 +3,25 @@
         <h2 id="think-text">Press the button to think about life.</h2>
 
         <button id="think" class="think-button">Press to think</button>
-        <button id="think-faster" class="think-button">Think faster</button>
+        <button id="think-faster" class="hide think-button">Think faster</button>
 
         <div id="author">
 
         </div>
 
     </div>
-    <div id="gameover" class="hide above lower-corner-button">
+    <div id="gameover" class="hide above fixed">
         <div class="gradient-mask-top">
             <div class="gradient-mask-bottom">
-                <div id="your-thoughts" class="fixed above">
+                <div id="your-thoughts" class="vertical">
                     <div class="your-toughts-filler"></div>
                     <div id="your-thoughts-goes-here">
-
                     </div>
-                    <button id="restart">Restart</button>
+                    <button id="restart" class="gameover-button">Think Again</button>
+                    <button id="share" class="gameover-button">
+                        <img src="img/icon.png" alt="share" class="share-icon">
+                        Share your thoughts
+                    </button>
                     <div class="your-toughts-filler"></div>
                 </div>
             </div>
@@ -40,6 +43,12 @@
     var thinkText = document.getElementById("think-text");
     var author = document.getElementById("author");
     var yourThoughtsContainer = document.getElementById("your-thoughts-goes-here");
+
+    var shareButton = document.getElementById("share");
+    shareButton.addEventListener("click", function () {
+        var url = "https://twitter.com/intent/tweet?text=" + encodeURIComponent("I thought about life. What are you thinking about?") + "&url=" + encodeURIComponent("https://horatiuromantic.com/sunset") + "&hashtags=" + encodeURIComponent("sunsetgame");
+        window.open(url, "_blank");
+    });
 
     think.addEventListener("click", function () {
         NextSentence();
@@ -86,7 +95,9 @@
 
         // hide think button
         SlowHide(think);
-        SlowHide(thinkFaster);
+        if (GetNumThoughts() >= _num_thinking_slow) {
+            SlowHide(thinkFaster);
+        }
         SlowHide(author);
 
         // wait 3 sec
@@ -114,7 +125,10 @@
                     if (!_is_dead) {
                         var delay4 = delay / 2;
                         SlowShow(think, delay4);
-                        SlowShow(thinkFaster, delay4);
+                        if (GetNumThoughts() >= _num_thinking_slow) {
+                            thinkFaster.classList.remove("hide");
+                            SlowShow(thinkFaster, delay4);
+                        }
                     }
 
                 }, delay3);

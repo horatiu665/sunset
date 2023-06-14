@@ -35,6 +35,7 @@ var debugSunset = document.getElementById("debug-sunset");
 var gameOver = document.getElementById("gameover");
 var thinkgame = document.getElementById("thinkgame");
 var thinkText = document.getElementById("think-text");
+var thinkFaster = document.getElementById("think-faster");
 var authorText = document.getElementById("author");
 
 // bg-land
@@ -155,6 +156,8 @@ function SetSunset(timeNorm) {
 
     debugSunset.innerHTML += "\tsunset01: " + sunset01.toFixed(2);
     debugSunset.innerHTML += "\ttime: " + Math.floor(timeNorm * totalTimeS);
+    debugSunset.innerHTML += "/" + Math.floor(realTotalTime());
+
 
     // calc sun position first
     var sunPos = GetSunPosition(sunset01);
@@ -300,21 +303,27 @@ function SetSunset(timeNorm) {
 }
 
 
-var num_thinking_slow = 3;
-
 // time in ms
 var time = 0;
 var accelerate = false;
 var dt = 1000 / 60;
 var timeNormalized = 0;
 var totalTimeS = 120;
-var realTotalTime = totalTimeS * _gameEndFactor;
-var timeToHideButton = realTotalTime - 15;
+var realTotalTime = () => totalTimeS * _gameEndFactor;
+var timeToHideButton = () => realTotalTime() - 15;
 var gameUpdateInterval = null;
-function StartGame() {
+function StartGame(minutes = 0) {
+    if (minutes==0)
+        minutes = 2;
+
+    totalTimeS = minutes / (1.5) * 60;
+
     time = 0;
     //SetSunset(0);
     _is_dead = false;
+
+    //PlayAudio();
+    SetVolume(1, 0);
 
     ClearYourThoughts();
 
@@ -324,6 +333,10 @@ function StartGame() {
 
     thinkgame.classList.remove("hide");
     think.classList.remove("hide");
+    SlowShow(think, 500);
+    thinkFaster.classList.add("hide");
+    
+
     setTimeout(() => {
         ShowAllSunParents(true);
 
@@ -344,7 +357,7 @@ function StartGame() {
 
             //console.log(Math.floor(timeNormalized * totalTimeS));
 
-            if (timeNormalized * totalTimeS > timeToHideButton) {
+            if (timeNormalized * totalTimeS > timeToHideButton()) {
                 _is_dead = true;
             }
 
@@ -447,17 +460,21 @@ lensflareCanvas.style.opacity = 0;
 // first game start
 var gameStartTime = 0;
 var gameStartInterval = setInterval(() => {
-    gameStartTime += 500;
+    gameStartTime += 100;
     if (!colorsJsLoaded)
         return;
 
-    if (gameStartTime < 1000)
-        return;
+    // if (gameStartTime < 1000)
+        // return;
 
     clearInterval(gameStartInterval);
-    StartGame();
+    // StartGame();
 
-}, 500);
+    // Show Main Menu
+    var mainMenu = document.getElementById("main-menu");
+    mainMenu.classList.remove("hide");
+
+}, 100);
 
 // cheat-next-sentence button
 var cheatNextSentenceButton = document.getElementById("cheat-next-sentence");

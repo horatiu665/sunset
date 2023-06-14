@@ -1,7 +1,7 @@
 <?php
 // if we are running on localhost, use this. else use "1.0" and update by hand.
 if ($_SERVER['HTTP_HOST'] == "localhost") {
-// if (true) {
+    // if (true) {
     $css_version = "t" . time();
 } else {
     $css_version = "1.2";
@@ -25,7 +25,8 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Signika+Negative:wght@300&family=Zilla+Slab:wght@300&display=swap" rel="stylesheet">
+    
     <!-- include defines.js -->
     <script src="defines.js"></script>
 </head>
@@ -33,10 +34,10 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
 <body>
 
     <div id="bg" class="bg-container">
-        <?php 
-            //include "bg_svg.php";
-            include "bg_png.php";
-            //include "bg_canvas.php";
+        <?php
+        //include "bg_svg.php";
+        include "bg_png.php";
+        //include "bg_canvas.php";
         ?>
     </div>
 
@@ -48,7 +49,7 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
         <div id="sun-halo" class="sun">
             <img src="img/sunr.png" alt="sun">
         </div>
-        
+
     </div>
     <div class="hide fixed sun-parent">
         <div id="sun-disk" class="sun">
@@ -84,55 +85,75 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
             <div id="slider">
                 <input type="range" min="0" max="360" value="180" class="slider" id="myRange">
                 <label for="myRange">hue</label>
-            </div><div id="slider">
+            </div>
+            <div id="slider">
                 <input type="range" min="0" max="1000" value="100" class="slider" id="myRange">
                 <label for="myRange">sat</label>
-            </div><div id="slider">
+            </div>
+            <div id="slider">
                 <input type="range" min="0" max="4060" value="100" class="slider" id="myRange">
                 <label for="myRange">bri</label>
-            </div><div id="slider">
+            </div>
+            <div id="slider">
                 <input type="range" min="0" max="1000" value="0" class="slider" id="myRange">
                 <label for="myRange">blur</label>
             </div>
             <div id="slider">
                 <input type="range" min="0" max="1460" value="0" class="slider" id="myRange">
                 <label for="myRange">invert</label>
-            </div><div id="slider">
+            </div>
+            <div id="slider">
                 <input type="range" min="0" max="860" value="0" class="slider" id="myRange">
                 <label for="myRange">sepia</label>
-            </div><div id="slider">
+            </div>
+            <div id="slider">
                 <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
                 <label for="myRange">grayscale</label>
-            </div><div id="slider">
+            </div>
+            <div id="slider">
                 <input type="range" min="0" max="660" value="100" class="slider" id="myRange">
                 <label for="myRange">contrast</label>
             </div>
         </div>
     </div>
-    
+
 
     <script>
         var colorsJsLoaded = false;
         // show all sun parents
-        function onColorsLoaded()
-        {
+        function onColorsLoaded() {
             colorsJsLoaded = true;
         }
-        
+
     </script>
 
     <script src="think_sentences.js"></script>
 
     <?php
-        include_once("thinkgame.php");
+    include_once("thinkgame.php");
     ?>
 
     <!-- <script src="TweenMax.min.js"></script> -->
     <script src="lensflare2.js"></script>
     <!-- on load colorsjs, do a function -->
-    <script src="https://colorjs.io/dist/color.global.js" onload="onColorsLoaded()" ></script>
+    <script src="https://colorjs.io/dist/color.global.js" onload="onColorsLoaded()"></script>
     <script src="game.js"></script>
 
+    <!-- sounds -->
+    <audio id="audio-birds" loop>
+        <source src="audio/birds by the water.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="audio-night" loop>
+        <source src="audio/night.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <script src="sound.js"></script>
+
+    <!-- main menu -->
+    <?php
+    include_once("mainmenu.php");
+    ?>
 </body>
 
 </html>
