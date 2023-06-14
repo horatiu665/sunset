@@ -30,8 +30,12 @@ if (bg != null) {
     }
 }
 
+var debugSunset = document.getElementById("debug-sunset");
+
 var gameOver = document.getElementById("gameover");
 var thinkgame = document.getElementById("thinkgame");
+var thinkText = document.getElementById("think-text");
+var authorText = document.getElementById("author");
 
 // bg-land
 var bgLand = document.getElementById("bg-land");
@@ -76,7 +80,7 @@ accelerateButton.addEventListener("pointerup", function () {
 document.addEventListener('pointerdown', function (e) {
     if (!follow) return;
     var t = e.clientY / window.innerHeight;
-    t = invlerp(azimuth, horizonY, t);
+    t = invlerp(_azimuth, _horizonY, t);
     SetSunset(t, e.clientX, e.clientY);
     console.log(sunset01);
 });
@@ -85,19 +89,9 @@ document.addEventListener('pointerdown', function (e) {
 // document.addEventListener('mousemove', function (e) {
 //     if (!follow) return;
 //     var t = e.clientY / window.innerHeight;
-//     t = invlerp(azimuth, horizonY, t);
+//     t = invlerp(_azimuth, _horizonY, t);
 //     SetSunset(t, e.clientX, e.clientY);
 // });
-
-if (false) {
-    var sunsetSlider = document.getElementById("sunset-slider").getElementsByTagName("input")[0];
-
-    var sunset01 = 0;
-    sunsetSlider.addEventListener("input", function () {
-        sunset01 = sunsetSlider.value * 0.001;
-        SetSunset(sunset01);
-    });
-}
 
 function SetScale(sun, x, y, scale) {
     sun.style.left = x + "px";
@@ -106,7 +100,7 @@ function SetScale(sun, x, y, scale) {
     sun.style.transform = "scale(" + scale + ")";
 };
 
-console.log(azimuth + " " + horizonY);
+console.log(_azimuth + " " + _horizonY);
 
 
 function GetSunPosition(sunset01) {
@@ -153,8 +147,14 @@ const PoorMansAnimationCurveColor = (colors, times, s01) => {
     return colors[0];
 };
 
-function SetSunset(newSunset01) {
-    sunset01 = Math.min(lerp(azimuth, horizonY, newSunset01), clampSunset);
+function SetSunset(timeNorm) {
+
+    debugSunset.innerHTML = "timeNormalized: " + timeNorm.toFixed(2);
+
+    sunset01 = Math.min(lerp(_azimuth, _horizonY, timeNorm), clampSunset);
+
+    debugSunset.innerHTML += "\tsunset01: " + sunset01.toFixed(2);
+    debugSunset.innerHTML += "\ttime: " + Math.floor(timeNorm * totalTimeS);
 
     // calc sun position first
     var sunPos = GetSunPosition(sunset01);
@@ -168,6 +168,7 @@ function SetSunset(newSunset01) {
     //sunWidth = sunWidth * scale;
     var y = sunY - sunHeight / 2;
     var x = sunX - sunWidth / 2;
+    // set sun position and scale
     SetScale(sunHalo, x, y, scale);
     SetScale(sunDisk, x, y, scale);
 
@@ -203,8 +204,8 @@ function SetSunset(newSunset01) {
     var haloOpacityTimes = [0, 0.5, 0.8, 0.9, 1, 1.5, 4];
     var haloOpacityValues = [1, 0.9, 0.8, 0.6, 0.3, 0.1, 0];
 
-    var flareOpacityTimes = [0, 0.35, 0.55, 4];
-    var flareOpacityValues = [0.8, 1, 0, 0];
+    var flareOpacityTimes = [-0.1, 0, 0.1, 0.35, 0.55, 4];
+    var flareOpacityValues = [0, 0, 0.8, 1, 0, 0];
 
     // lensflareCanvas
     var lensflareOpacity = 0;
@@ -305,13 +306,29 @@ var time = 0;
 var accelerate = false;
 var dt = 1000 / 60;
 var timeNormalized = 0;
-var totalTimeS = 50;
+var totalTimeS = 120;
+var realTotalTime = totalTimeS * _gameEndFactor;
+var timeToHideButton = realTotalTime - 15;
 var gameUpdateInterval = null;
 function StartGame() {
     time = 0;
-    SetSunset(0);
+    //SetSunset(0);
+    _is_dead = false;
 
-    SetGameOverVisibility(false);
+    ClearYourThoughts();
+
+    curThinkSentenceIndex = 0;
+    // init the think sentence
+    SetThinkSentence("Press the button to think about life.", "Horațiu");
+
+    thinkgame.classList.remove("hide");
+    think.classList.remove("hide");
+    setTimeout(() => {
+        ShowAllSunParents(true);
+
+    }, 100);
+
+    SetGameOverVisibility(false, true);
 
     gameUpdateInterval = setInterval(function () {
         if (!follow) {
@@ -320,9 +337,17 @@ function StartGame() {
                 time += totalTimeS * 1000 / 60;
             }
             timeNormalized = time / (totalTimeS * 1000);
+            // 0 to 1 goes in. but  BEWARE! inside it is transformed, so the sunset01 will not actually be 0..1 
+            // but that's fine for the jam.
             SetSunset(timeNormalized);
 
-            if (timeNormalized > 1.5) {
+            //console.log(Math.floor(timeNormalized * totalTimeS));
+
+            if (timeNormalized * totalTimeS > timeToHideButton) {
+                _is_dead = true;
+            }
+
+            if (timeNormalized > _gameEndFactor) {
                 clearInterval(gameUpdateInterval);
                 gameUpdateInterval = null;
                 OnGameOver();
@@ -331,31 +356,48 @@ function StartGame() {
     }, dt);
 }
 
-function SetGameOverVisibility(gameOverVisible) {
+function SetGameOverVisibility(gameOverVisible, thinkgameVisible) {
 
     if (gameOverVisible) {
         gameOver.classList.remove("hide");
-        gameOver.classList.add("show");
+        gameOver.classList.remove("slow-hide");
+        gameOver.classList.add("slow-show");
         gameOver.classList.add("vertical");
+        setTimeout(() => {
+            gameOver.classList.remove("slow-show");
+        }, 1000);
 
-        thinkgame.classList.add("hide");
-        thinkgame.classList.remove("vertical");
-        thinkgame.classList.remove("show");
     } else {
-        gameOver.classList.remove("show");
-        gameOver.classList.remove("vertical");
-        gameOver.classList.add("hide");
+        gameOver.classList.remove("slow-show");
+        //gameOver.classList.remove("vertical");
+        gameOver.classList.add("slow-hide");
 
-        thinkgame.classList.add("show");
+    }
+
+    if (thinkgameVisible) {
+        thinkgame.classList.add("slow-show");
         thinkgame.classList.add("vertical");
+        thinkgame.classList.remove("slow-hide");
         thinkgame.classList.remove("hide");
+        setTimeout(() => {
+            thinkgame.classList.remove("slow-show");
+        }, 1000);
+
+    } else {
+        thinkgame.classList.add("slow-hide");
+        //thinkgame.classList.remove("vertical");
+        thinkgame.classList.remove("slow-show");
+
     }
 
 }
 
 function OnGameOver() {
     if (true) {
-        SetGameOverVisibility(true);
+
+        SetYourThoughtsStraight();
+
+        SetGameOverVisibility(true, false);
     }
     else {
         StartGame();
@@ -364,20 +406,31 @@ function OnGameOver() {
 
 // do-restart-sunset button
 var doRestartSunsetButton = document.getElementById("do-restart-sunset");
-doRestartSunsetButton.addEventListener("click", function () {
-    StartGame();
-});
+doRestartSunsetButton.addEventListener("click", () => OnRestartButtonPress());
+
+const OnRestartButtonPress = () => {
+    SetGameOverVisibility(false, false);
+    setTimeout(() => {
+        SetGameOverVisibility(false, true);
+        StartGame();
+
+    }, 3000);
+
+};
 
 // do-mouse-control button
 var doMouseControlButton = document.getElementById("do-mouse-control");
 doMouseControlButton.addEventListener("click", function () {
-    follow = true;
+    follow = !follow;
 });
 
 function ShowAllSunParents(vis = true) {
+
     // show all sun parents
     var sunParents = document.getElementsByClassName("sun-parent");
     for (var i = 0; i < sunParents.length; i++) {
+        // console.log("sun parent: ");
+        // console.log(sunParents[i]);
         if (vis) {
             sunParents[i].classList.remove("hide");
         }
@@ -387,6 +440,9 @@ function ShowAllSunParents(vis = true) {
     }
 }
 
+SetSunset(0);
+lensflareCanvas.style.opacity = 0;
+
 // first game start
 var gameStartTime = 0;
 var gameStartInterval = setInterval(() => {
@@ -394,10 +450,19 @@ var gameStartInterval = setInterval(() => {
     if (!colorsJsLoaded)
         return;
 
-    if (gameStartTime < 3000)
+    if (gameStartTime < 1000)
         return;
 
     clearInterval(gameStartInterval);
     StartGame();
 
 }, 500);
+
+// cheat-next-sentence button
+var cheatNextSentenceButton = document.getElementById("cheat-next-sentence");
+cheatNextSentenceButton.addEventListener("click", function () {
+    RecordThought(GetCurrentSentenceObj());
+
+    thinkText.innerHTML = GetNextSentence();
+    authorText.innerHTML = GetAuthor();
+});

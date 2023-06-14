@@ -61,6 +61,9 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
         <button id="do-mouse-control">Mouse Controls</button>
 
         <button id="accelerate">Accelerate</button>
+        <button id="cheat-next-sentence">Next Sentence</button>
+
+        <p id="debug-sunset">sunset: 0</p>
 
         <!-- <div id="sunset-slider">
             <input type="range" min="0" max="1000" value="0" class="slider" id="sunset-slider-input">
@@ -117,6 +120,8 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
         }
         
     </script>
+
+    <script src="think_sentences.js"></script>
 
     <?php
         include_once("thinkgame.php");

@@ -32,7 +32,7 @@
     -moz-user-select: none; /* Old versions of Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-    
+
 }
 
 #think:hover {
@@ -44,6 +44,17 @@
 #think-text {
     color: var(--text-color);
 }
+
+#author {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-family: 'EB Garamond', serif;
+    opacity: 0.75;
+}
+
 
 .slow-hide {
     animation: slow-hide 1s ease-in-out forwards;
@@ -72,16 +83,63 @@
     }
 }
 
-#gameover {
+.lower-corner-button {
+    /* bottom left */
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    height: 20vh;
+    justify-content: flex-end;
+
+}
+
+#your-thoughts {
+    position: fixed;
     width: 80%;
-    height: 80%;
-    margin: 10%;
+    height: 100%;
+    left: 0;
+    /* bottom: 0; */
+    /* top: 0; */
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 10vw;
+    margin-right: 10vw;
 
-    font-size: 2rem;
+    overflow: auto;
 
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+}
+
+.gradient-mask-top {
+    -webkit-mask-image: -webkit-gradient(linear, left 5%, left 20%, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
+    /* pointer-events: none; */
+    
+    position: fixed;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+.gradient-mask-bottom {
+    -webkit-mask-image: -webkit-gradient(linear, left 90%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+    
+    /* pointer-events: none; */
+
+    position: fixed;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.your-toughts-filler {
+    height: 35vh;
+}
+
+#your-thoughts-goes-here {
+    pointer-events: initial;
+}
+
+#gameover {
 }
 
 #gameover button {

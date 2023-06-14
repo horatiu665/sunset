@@ -1,7 +1,9 @@
 var sunset01 = 0;
 
-var azimuth = -0.1;
-var horizonY = 0.7;
+var _azimuth = -0.1;
+var _horizonY = 0.7;
+var _gameEndFactor = 1.5;
+var _is_dead = false;
 
 var clampSunset = 2;
 

@@ -10,5 +10,7 @@
 ?>
 
 <script>
-    
+    // optional alternative defines here.
+    // e.g. _azimuth = 0.1; _horizontalY = 0.9; etc.
+    // depending on the picture itself...
 </script>
