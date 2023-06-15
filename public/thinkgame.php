@@ -48,7 +48,10 @@
 
     var shareButton = document.getElementById("share");
     shareButton.addEventListener("click", function () {
-        var url = "https://twitter.com/intent/tweet?text=" + encodeURIComponent("I thought about life. What are you thinking about?") + "&url=" + encodeURIComponent("https://horatiuromantic.com/sunset") + "&hashtags=" + encodeURIComponent("sunsetgame");
+        var url = "https://twitter.com/intent/tweet?text=" 
+        + encodeURIComponent("I thought about life. What are you thinking about?") 
+        + "&url=" + encodeURIComponent("https://horatiuromantic.com/sunset")
+         + "&hashtags=" + encodeURIComponent("sunsetgame,castlejam");
         window.open(url, "_blank");
     });
 
