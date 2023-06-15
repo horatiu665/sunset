@@ -335,7 +335,6 @@ function StartGame(minutes = 0) {
     think.classList.remove("hide");
     SlowShow(think, 500);
     thinkFaster.classList.add("hide");
-    
 
     setTimeout(() => {
         ShowAllSunParents(true);
@@ -420,16 +419,26 @@ function OnGameOver() {
 
 // do-restart-sunset button
 var doRestartSunsetButton = document.getElementById("do-restart-sunset");
-doRestartSunsetButton.addEventListener("click", () => OnRestartButtonPress());
+doRestartSunsetButton.addEventListener("click", () => OnDebugRestartButtonPress());
 
-const OnRestartButtonPress = () => {
+const OnDebugRestartButtonPress = () => {
     SetGameOverVisibility(false, false);
     setTimeout(() => {
         SetGameOverVisibility(false, true);
         StartGame();
 
     }, 3000);
+};
 
+const OnRestartButtonPress = () => {
+    SetGameOverVisibility(false, false);
+    setTimeout(() => {
+        SetSunset(0);
+
+        // show main menu
+        SetMainMenuVisibility(true);
+
+    }, 3000);
 };
 
 // do-mouse-control button

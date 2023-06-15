@@ -24,8 +24,7 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Signika+Negative:wght@300&family=Zilla+Slab:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Diphylleia&family=EB+Garamond&display=swap" rel="stylesheet">
     
     <!-- include defines.js -->
     <script src="defines.js"></script>

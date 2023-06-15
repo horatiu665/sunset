@@ -6,7 +6,8 @@
 </style>
 
 <div id="main-menu" class="hide mm-vertical fixed above">
-    <img id="main-menu-icon" src="img/icon.png" alt="icon">
+    <!-- <img id="main-menu-icon" src="img/icon.png" alt="icon"> -->
+    <h2>sunset</h2>
     <button id="play1" class="main-menu-button">3 minutes sunset</button>
     <button id="play2" class="main-menu-button">7 minutes sunset</button>
     <button id="play3" class="main-menu-button">15 minutes sunset</button>

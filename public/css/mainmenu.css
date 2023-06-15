@@ -15,6 +15,13 @@
 
 }
 
+#main-menu h2 {
+    font-family: 'Calistoga', cursive;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #fff7b8;
+}
+
 #main-menu-icon {
     width: 10rem;
     height: 10rem;

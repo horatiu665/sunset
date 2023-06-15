@@ -17,7 +17,9 @@
                     <div class="your-toughts-filler"></div>
                     <div id="your-thoughts-goes-here">
                     </div>
-                    <button id="restart" class="gameover-button">Think Again</button>
+                    <button id="restart" class="gameover-button">
+                        Think Again
+                    </button>
                     <button id="share" class="gameover-button">
                         <img src="img/icon.png" alt="share" class="share-icon">
                         Share your thoughts
