@@ -25,7 +25,7 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Diphylleia&family=EB+Garamond&display=swap" rel="stylesheet">
-    
+
     <!-- include defines.js -->
     <script src="defines.js"></script>
 </head>
@@ -65,6 +65,7 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
 
         <p id="debug-sunset">sunset: 0</p>
 
+        <p id="debug-sound">sound: 0</p>
         <!-- <div id="sunset-slider">
             <input type="range" min="0" max="1000" value="0" class="slider" id="sunset-slider-input">
             <label for="sunset-slider-input">Sunset</label>
@@ -132,12 +133,6 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
     include_once("thinkgame.php");
     ?>
 
-    <!-- <script src="TweenMax.min.js"></script> -->
-    <script src="lensflare2.js"></script>
-    <!-- on load colorsjs, do a function -->
-    <script src="https://colorjs.io/dist/color.global.js" onload="onColorsLoaded()"></script>
-    <script src="game.js"></script>
-
     <!-- sounds -->
     <audio id="audio-birds" loop>
         <source src="audio/birds by the water.mp3" type="audio/mpeg">
@@ -148,6 +143,12 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
         Your browser does not support the audio element.
     </audio>
     <script src="sound.js"></script>
+
+    <!-- <script src="TweenMax.min.js"></script> -->
+    <script src="lensflare2.js"></script>
+    <!-- on load colorsjs, do a function -->
+    <script src="https://colorjs.io/dist/color.global.js" onload="onColorsLoaded()"></script>
+    <script src="game.js"></script>
 
     <!-- main menu -->
     <?php

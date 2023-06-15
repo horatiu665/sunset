@@ -8,6 +8,8 @@ Your browser does not support the audio element.
 Your browser does not support the audio element.
 </audio> */
 
+var debugSound = document.getElementById("debug-sound");
+
 var audioBirds = document.getElementById("audio-birds");
 var audioNight = document.getElementById("audio-night");
 
@@ -18,9 +20,11 @@ var audioDt = 100;
 
 // this must be called after the first interaction with the document.
 // could be in the main menu.
-function PlayAudio() {
+function PlayAudio(initBirdsVol = 0, initNightVol = 0) {
     audioBirds.play();
     audioNight.play();
+    audioBirds.volume = initBirdsVol;
+    audioNight.volume = initNightVol;
 }
 
 function SetVolume(totalVolume, night01) {
@@ -31,4 +35,5 @@ function SetVolume(totalVolume, night01) {
 setInterval(() => {
     audioBirds.volume = lerp(audioBirds.volume, audioBirdsTargetVol, 0.02);
     audioNight.volume = lerp(audioNight.volume, audioNightTargetVol, 0.02);
+    debugSound.innerHTML = "audioBirds.volume: " + audioBirds.volume.toFixed(2) + "\taudioNight.volume: " + audioNight.volume.toFixed(2);
 }, audioDt);

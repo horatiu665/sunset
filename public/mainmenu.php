@@ -35,16 +35,23 @@
     play1.addEventListener("click", function () {
         StartGame(3);
         SetMainMenuVisibility(false);
+        // play sounds...
+        PlayAudio();
+
     });
 
     play2.addEventListener("click", function () {
         StartGame(7);
         SetMainMenuVisibility(false);
+        PlayAudio();
+
     });
 
     play3.addEventListener("click", function () {
         StartGame(15);
         SetMainMenuVisibility(false);
+        PlayAudio();
+
     });
 
 </script>

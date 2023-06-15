@@ -158,6 +158,11 @@ function SetSunset(timeNorm) {
     debugSunset.innerHTML += "\ttime: " + Math.floor(timeNorm * totalTimeS);
     debugSunset.innerHTML += "/" + Math.floor(realTotalTime());
 
+    // sound volume
+    var soundTimes = [-1, 0, 0.33, 0.66, 1, 4];
+    var soundValues= [0,  0, 0,      1 , 1 ,1];
+    var soundNight01 = PoorMansAnimationCurve(soundValues, soundTimes, sunset01);
+    SetVolume(1, soundNight01);
 
     // calc sun position first
     var sunPos = GetSunPosition(sunset01);
@@ -310,7 +315,8 @@ var dt = 1000 / 60;
 var timeNormalized = 0;
 var totalTimeS = 120;
 var realTotalTime = () => totalTimeS * _gameEndFactor;
-var timeToHideButton = () => realTotalTime() - 15;
+var timeToNotShowButton = () => realTotalTime() - 15;
+var timeToHideButton = () => realTotalTime() - 7;
 var gameUpdateInterval = null;
 function StartGame(minutes = 0) {
     if (minutes==0)
@@ -356,8 +362,12 @@ function StartGame(minutes = 0) {
 
             //console.log(Math.floor(timeNormalized * totalTimeS));
 
-            if (timeNormalized * totalTimeS > timeToHideButton()) {
+            if (timeNormalized * totalTimeS > timeToNotShowButton()) {
                 _is_dead = true;
+            }
+            if (timeNormalized * totalTimeS > timeToHideButton()) {
+                SlowHide(think);
+                SlowHide(thinkFaster);
             }
 
             if (timeNormalized > _gameEndFactor) {
@@ -408,6 +418,8 @@ function SetGameOverVisibility(gameOverVisible, thinkgameVisible) {
 function OnGameOver() {
     if (true) {
 
+        SetVolume(0, 1);
+
         SetYourThoughtsStraight();
 
         SetGameOverVisibility(true, false);
@@ -434,6 +446,8 @@ const OnRestartButtonPress = () => {
     SetGameOverVisibility(false, false);
     setTimeout(() => {
         SetSunset(0);
+
+        SetVolume(0, 0);
 
         // show main menu
         SetMainMenuVisibility(true);

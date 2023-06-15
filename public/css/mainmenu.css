@@ -9,10 +9,17 @@
 
 #main-menu
 {
-    width: 30vw;
+    width: 40vw;
     height: 100%;
-    margin: 0 35vw;
-
+    margin: 0 30vw;
+}
+@media screen and (max-width: 666px) {
+    #main-menu
+    {
+        width: 80vw;
+        height: 100%;
+        margin: 0 10vw;
+    }
 }
 
 #main-menu h2 {
