@@ -65,3 +65,16 @@
     /* color: var(--menu-button-color); */
     cursor: pointer;
 }
+
+#made-by {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-family: 'EB Garamond', serif;
+    /* drop shadow */
+    text-shadow: 0 0 1rem #bb5454;
+}
+
+#made-by a {
+    color: var(--text-color);
+    
+}

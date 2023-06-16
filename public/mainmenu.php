@@ -11,7 +11,9 @@
     <button id="play1" class="main-menu-button">3 minutes sunset</button>
     <button id="play2" class="main-menu-button">7 minutes sunset</button>
     <button id="play3" class="main-menu-button">15 minutes sunset</button>
-
+    <div id="made-by">
+        Made by <a href="https://horatiuromantic.com" target="_blank">@horatiuromantic</a> for <a href="https://itch.io/jam/castle-game-jam-2023" target="_blank">Castle Game Jam 2023</a>
+    </div>
 </div>
 <script src="mainmenu.js"></script>
 <script>

@@ -4,6 +4,45 @@ var curThinkSentenceIndex = 0;
 
 var scramble = true;
 
+var thinkings = {
+    initial: { "prio": 0, "noprefix": true, "thinkabout": "Press the button to think about life.", "history": "You thought about life.", "author": "Horațiu" },
+    now: [
+        { "prio": 1, "thinkabout": "this moment.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "the sunshine.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "why you are here.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "today.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "now.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "your breathing.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "existing.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "being here.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "being yourself.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "your surroundings.", "author": "Horațiu" },
+    ],
+    love: [
+        { "prio": 1, "thinkabout": "someone you love.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "being in love.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "falling in love.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "all the different forms of love.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "friendship.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "family.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "a friendly stranger.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "meeting a new friend.", "author": "Horațiu" },
+
+    ],
+    not: [
+        { "prio": 5, "thinkabout": "the worst game you ever played.", "author": "Grzegorz" },
+        { "prio": 5, "thinkabout": "this game.", "author": "Horațiu" },
+    ],
+    life: [
+        { "prio": 1, "thinkabout": "a precious childhood memory.", "author": "Lenja feat. Horațiu" },
+    ],
+    universe: [
+        { "prio": 1, "thinkabout": "how space is expanding but is also boundless.", "author": "Marlene" },
+        { "prio": 20, "thinkabout": "a super-black hole.", "author": "Horațiu feat. Friedemann" },
+    ]
+
+}
+
 // format: "Think about ..."
 var thinkSentences = [
     { "prio": 0, "noprefix": true, "thinkabout": "Press the button to think about life.", "history": "You thought about life.", "author": "Horațiu" },
@@ -39,6 +78,7 @@ var thinkSentences = [
     { "prio": 20, "thinkabout": "how hard it is to make videogames.", "author": "Friedemann" },
     { "prio": 20, "thinkabout": "a joke you can tell by heart.", "author": "Friedemann" },
     { "prio": 20, "thinkabout": "dust.", "author": "Friedemann" },
+    { "prio": 20, "thinkabout": "nothing at all.", "author": "Horațiu" },
     { "prio": 20, "thinkabout": "thinking.", "author": "Horațiu" },
     { "prio": 20, "thinkabout": "not thinking.", "author": "Grzegorz" },
     { "prio": 20, "thinkabout": "how you are perfectly valid.", "author": "Marlene feat. Horațiu" },

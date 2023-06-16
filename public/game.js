@@ -307,11 +307,19 @@ function SetSunset(timeNorm) {
     }
 }
 
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 
 // time in ms
 var time = 0;
 var accelerate = false;
-var dt = 1000 / 60;
+var dt = 1000 / 30;
+// if platform is mobile, use 12 fps
+if (isMobile()) {
+    dt = 1000 / 12;
+}
 var timeNormalized = 0;
 var totalTimeS = 120;
 var realTotalTime = () => totalTimeS * _gameEndFactor;
