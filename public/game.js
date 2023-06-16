@@ -141,7 +141,7 @@ const PoorMansAnimationCurveColor = (colors, times, s01) => {
         var nextColor = colors[(i + 1) % colors.length]; // consider clamping
         var nextTime = times[(i + 1) % colors.length];
         if (s01 >= time && s01 <= nextTime) {
-            var v = Color.mix(color, nextColor, invlerp(time, nextTime, s01));
+            var v = mix_colors(color, nextColor, invlerp(time, nextTime, s01));
             return v;
         }
     }
@@ -183,24 +183,24 @@ function SetSunset(timeNorm) {
     // think game
     {
         var textColors = [
-            new Color("#fffdf5"),
-            new Color("#fff2d9"),
-            new Color("#ff8669"),
-            new Color("#ff2e13"),
-            new Color("#ff2e13"),
-            new Color("#777777"),
-            new Color("#000000"),
+            "#fffdf5",
+            "#fff2d9",
+            "#ff8669",
+            "#ff2e13",
+            "#ff2e13",
+            "#777777",
+            "#000000",
         ];
         var textTimes = [0, 0.47, 0.6, 0.73, 0.88, 1, 4];
         var textColor = PoorMansAnimationCurveColor(textColors, textTimes, sunset01);
         document.documentElement.style.setProperty('--text-color', textColor.toString({ format: "hex" }));
 
         var skyColors = [
-            new Color("#71a9ff"),
-            new Color("#b26ed8"),
+            "#71a9ff",
+            "#b26ed8",
         ];
         // set --sunset-color-avg variable
-        var sunsetColorAvg = Color.mix(skyColors[0], skyColors[1], sunset01);
+        var sunsetColorAvg = mix_colors(skyColors[0], skyColors[1], sunset01);
         document.documentElement.style.setProperty('--sunset-color-avg', sunsetColorAvg.toString({ format: "hex" }));
     }
 

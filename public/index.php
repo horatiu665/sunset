@@ -147,7 +147,8 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
     <!-- <script src="TweenMax.min.js"></script> -->
     <script src="lensflare2.js"></script>
     <!-- on load colorsjs, do a function -->
-    <script src="https://colorjs.io/dist/color.global.js" onload="onColorsLoaded()"></script>
+    <!-- <script src="https://colorjs.io/dist/color.global.js" onload="onColorsLoaded()"></script> -->
+    <script src="color_simple.js"></script>
     <script src="game.js"></script>
 
     <!-- main menu -->
