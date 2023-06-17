@@ -53,6 +53,10 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
     <div class="hide fixed sun-parent">
         <div id="sun-disk" class="sun">
             <img src="img/sundisk.png" alt="sun">
+            <!-- circle with #ff1309 color -->
+            <!-- <svg width="100%" height="100%">
+                <circle cx="50%" cy="50%" r="50%" fill="#ff1309" />
+            </svg> -->
         </div>
     </div>
 

@@ -17,6 +17,7 @@ var thinkings = {
         { "prio": 1, "thinkabout": "being here.", "author": "Horațiu" },
         { "prio": 1, "thinkabout": "being yourself.", "author": "Horațiu" },
         { "prio": 1, "thinkabout": "your surroundings.", "author": "Horațiu" },
+
     ],
     love: [
         { "prio": 1, "thinkabout": "someone you love.", "author": "Horațiu" },
@@ -27,6 +28,8 @@ var thinkings = {
         { "prio": 1, "thinkabout": "family.", "author": "Horațiu" },
         { "prio": 1, "thinkabout": "a friendly stranger.", "author": "Horațiu" },
         { "prio": 1, "thinkabout": "meeting a new friend.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "reconnecting with an old friend.", "author": "Horațiu" },
+        { "prio": 1, "thinkabout": "making someone happy.", "author": "Horațiu" },
 
     ],
     not: [
@@ -39,6 +42,9 @@ var thinkings = {
     universe: [
         { "prio": 1, "thinkabout": "how space is expanding but is also boundless.", "author": "Marlene" },
         { "prio": 20, "thinkabout": "a super-black hole.", "author": "Horațiu feat. Friedemann" },
+    ],
+    games: [
+        
     ]
 
 }
@@ -48,24 +54,24 @@ var thinkSentences = [
     { "prio": 0, "noprefix": true, "thinkabout": "Press the button to think about life.", "history": "You thought about life.", "author": "Horațiu" },
     { "prio": 1, "thinkabout": "this moment.", "author": "Horațiu" },
     { "prio": 1, "thinkabout": "someone you love.", "author": "Horațiu" },
-    { "prio": 1, "thinkabout": "the bugs.", "author": "Friedemann" },
+    { "prio": 1, "thinkabout": "your feet.", "author": "Friedemann" },
     { "prio": 1, "thinkabout": "how space is expanding but is also boundless.", "author": "Marlene" },
     { "prio": 1, "thinkabout": "the sunshine.", "author": "Horațiu" },
     { "prio": 1, "thinkabout": "a precious childhood memory.", "author": "Lenja feat. Horațiu" },
     { "prio": 1, "thinkabout": "the last time you were truly happy.", "author": "Github CoPilot" },
     { "prio": 3, "thinkabout": "your grandparents.", "author": "Friedemann" },
-    { "prio": 3, "thinkabout": "your feet.", "author": "Friedemann" },
     { "prio": 3, "thinkabout": "a funny cat.", "author": "Horațiu" },
     { "prio": 3, "thinkabout": "Horațiu.", "author": "Friedemann" },
     { "prio": 3, "thinkabout": "the last time you felt truly alive.", "author": "Github CoPilot" },
     { "prio": 3, "thinkabout": "a really good laughter.", "author": "Marlene" },
+    { "prio": 1, "thinkabout": "the bugs.", "author": "Friedemann" },
     { "prio": 3, "thinkabout": "the last time you felt betrayed.", "author": "Lenja" },
-    { "prio": 3, "thinkabout": "your favorite meal.", "author": "Friedemann" },
     { "prio": 3, "thinkabout": "Friedemann.", "author": "Horațiu" },
     
-    { "prio": 5, "thinkabout": "the worst game you ever played.", "author": "Grzegorz" },
-    { "prio": 5, "thinkabout": "this game.", "author": "Horațiu" },
+    { "prio": 20, "thinkabout": "the worst game you ever played.", "author": "Grzegorz" },
+    { "prio": 20, "thinkabout": "this game.", "author": "Horațiu" },
     
+    { "prio": 20, "thinkabout": "your favorite meal.", "author": "Friedemann" },
     { "prio": 20, "thinkabout": "being on a boat.", "author": "Friedemann" },
     { "prio": 20, "thinkabout": "how fast your fingernails are growing.", "author": "Marlene" },
     { "prio": 20, "thinkabout": "lemons.", "author": "Friedemann" },
@@ -93,6 +99,20 @@ var thinkSentences = [
     { "prio": 20, "thinkabout": "how a small seed can give birth to a mighty tree. Unless it's a carrot seed, then it can give birth to a mighty carrot.", "author": "Tobias feat. Horațiu" },
     { "prio": 20, "thinkabout": "how a small event can change the course of your life.", "author": "Tobias" },
     { "prio": 20, "thinkabout": "the last time you did a game jam in a medieval castle.", "author": "Ernie" },
+
+    { "prio": 20, "thinkabout": "shitty AI art with the wrong amount of fingers.", "author": "Igor feat. Horațiu" },
+    { "prio": 20, "thinkabout": "being really stuffed like a New Year piglet.", "author": "Jānis" },
+    
+    { "prio": 20, "thinkabout": "the last good game you played.", "author": "Jānis Skuja" },
+    { "prio": 20, "thinkabout": "why you are.", "author": "Ģirts " },
+    { "prio": 20, "thinkabout": "naked penguins.", "author": "Igor" },
+
+    { "prio": 20, "thinkabout": "your favorite comic.", "author": "Jānis feat. Horațiu" },
+    { "prio": 20, "thinkabout": "games.", "author": "Tobias" },
+    { "prio": 20, "thinkabout": "your last dream.", "author": "Charlie" },
+
+
+
 
 ];
 
