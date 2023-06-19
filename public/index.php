@@ -21,6 +21,24 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
     <meta name="description" content="A quiet introspective game about reflection at Sunset">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- more meta stuff -->
+    <meta property=’og:title’ content='Sunset Game'/>
+    <meta property=’og:description’ content="A quiet introspective game about reflection at Sunset"/>
+    <meta property="og:type" content='website'/>
+    <meta property=’og:url’ content='https://www.horatiuromantic.com/sunset/'/>
+    <meta property=’og:image’ content='https://www.horatiuromantic.com/sunset/img/sunset_itch.png'/>
+    <meta property="og:image:type" content="image/png">
+    <meta property='og:image:width' content='630' />
+    <meta property='og:image:height' content='500' />
+
+    <meta name="twitter:site" content="Sunset Game">
+    <meta name="twitter:title" content="Sunset Game">
+    <meta name="twitter:description" content="A quiet introspective game about reflection at Sunset">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:src" content="https://www.horatiuromantic.com/sunset/img/sunset_itch.png"/>    
+    <meta name="theme-color" content="#71a9ff">
+
+
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
