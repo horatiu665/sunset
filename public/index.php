@@ -38,7 +38,6 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
     <meta name="twitter:image:src" content="https://www.horatiuromantic.com/sunset/img/sunset_itch.png"/>    
     <meta name="theme-color" content="#71a9ff">
 
-
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
